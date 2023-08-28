@@ -52,6 +52,7 @@ def main():
                 target_image_path = 'barbie.jpg'
 
             output = run_model(target_image_path, byte_im)
+            print("************************")
             print(type(output))
             print(output)
             st.image(output["result"], use_column_width=True)
