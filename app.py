@@ -57,12 +57,12 @@ def main():
                 st.header("Output Image")
                 st.image(output, width = 256)
             
-            if st.button("Make Me Ken"):
-                if target_image_option == 'Ken':
-                    target_image_path = 'ken.jpg'
-                else:
-                    target_image_path = 'barbie.jpg'
-            st.balloons()
+                if st.button("Make Me Ken"):
+                    if target_image_option == 'Ken':
+                        target_image_path = 'ken.jpg'
+                    else:
+                        target_image_path = 'barbie.jpg'
+                    st.balloons()
 
 
 
