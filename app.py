@@ -36,7 +36,7 @@ def main():
         if realtime_update:
             st.sidebar.write("Double click to save crop")
             
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
 
         with col1:
             st.header("Original Image")
