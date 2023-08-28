@@ -56,8 +56,8 @@ def main():
             print("************************")
             print(type(output))
             print(output)
-            st.image(output["result"], use_column_width=True)
-
+            #st.image(output["result"], use_column_width=True)
+            st.image(output, width = 725)
 
 
 if __name__ == '__main__':
