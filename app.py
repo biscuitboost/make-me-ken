@@ -26,7 +26,7 @@ def main():
     st.write(DESC)
 
     target_image_option = st.radio('Take Your Pick:', ('Ken', 'Barbie'))
-    image_file = st.file_uploader("Upload Clear Photo Of Your Face", type=['jpg', 'png'])
+    image_file = st.file_uploader("Upload Clear Photo Of Your Face.", type=['jpg', 'png'])
 
     if image_file is not None:
         image_data = image_file.read()
