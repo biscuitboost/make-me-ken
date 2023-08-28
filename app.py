@@ -42,9 +42,9 @@ def main():
             # Get a cropped image from the frontend
             cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#0000FF",
                                     aspect_ratio=(1, 1))
-            st.image(cropped_img, width = 256)
         
         with col2:
+            st.image(cropped_img, width = 256)
             buf = io.BytesIO()
             cropped_img.save(buf, format='JPEG')
             byte_im = buf.getvalue()
