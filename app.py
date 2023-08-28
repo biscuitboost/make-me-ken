@@ -31,10 +31,15 @@ def main():
 
     if image_file is not None:
         img = Image.open(image_file)
-        realtime_update = st.sidebar.checkbox(label="Crop in Real Time", value=True)
-
-        if realtime_update:
-            st.sidebar.write("Double click to save crop")
+        if st.button("Make Me Ken"):
+            if target_image_option == 'Ken':
+                target_image_path = 'ken.jpg'
+            else:
+                target_image_path = 'barbie.jpg'
+        
+        #realtime_update = st.sidebar.checkbox(label="Crop in Real Time", value=True)
+        #if realtime_update:
+        #    st.sidebar.write("Double click to save crop")
             
         col1, col2 = st.columns(2)
 
@@ -48,12 +53,6 @@ def main():
             buf = io.BytesIO()
             cropped_img.save(buf, format='JPEG')
             byte_im = buf.getvalue()
-
-        if st.button("Make Me Ken"):
-            if target_image_option == 'Ken':
-                target_image_path = 'ken.jpg'
-            else:
-                target_image_path = 'barbie.jpg'
 
             output = run_model(target_image_path, byte_im)
 
