@@ -30,7 +30,7 @@ def main():
 
     if image_file is not None:
         image_data = image_file.read()
-        st.image(image_data, width = 725)
+        st.image(image_data, width = 180)
 
         if st.button("Swap Face"):
             if target_image_option == 'Ken':
