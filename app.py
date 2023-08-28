@@ -50,19 +50,20 @@ def main():
             cropped_img.save(buf, format='JPEG')
             byte_im = buf.getvalue()
 
+        if st.button("Make Me Ken"):
+            if target_image_option == 'Ken':
+                target_image_path = 'ken.jpg'
+            else:
+                target_image_path = 'barbie.jpg'
             output = run_model(target_image_path, byte_im)
 
             # Replacing the cropped image with the output image from the model
             with col2:
                 st.header("Output Image")
                 st.image(output, width = 256)
-            
-                if st.button("Make Me Ken"):
-                    if target_image_option == 'Ken':
-                        target_image_path = 'ken.jpg'
-                    else:
-                        target_image_path = 'barbie.jpg'
-                    st.balloons()
+            st.balloons()
+
+
 
 
 
