@@ -7,7 +7,6 @@ import replicate
 # Set up configurations
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
-REPLICATE_API_TOKEN = 'xxx'
 MODEL_ADDRESS = "lucataco/faceswap:9a4298548422074c3f57258c5d544497314ae4112df80d116f0d2109e843d20d"
 TITLE = "I want to be Ken"
 DESC = '''Upload or take a picture to become Ken or Barbie'''
