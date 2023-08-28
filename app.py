@@ -26,13 +26,13 @@ def main():
     st.write(DESC)
 
     target_image_option = st.radio('Select your Target Image:', ('Ken', 'Barbie'))
-    image_file = st.file_uploader("Upload Swap Image", type=['jpg', 'png'])
+    image_file = st.file_uploader("Upload Clear Photo Of Your Face", type=['jpg', 'png'])
 
     if image_file is not None:
         image_data = image_file.read()
-        st.image(image_data, width = 180)
+        st.image(image_data, width = 45)
 
-        if st.button("Swap Face"):
+        if st.button("Make Me Ken"):
             if target_image_option == 'Ken':
                 target_image_path = 'ken.jpg'
             else:
