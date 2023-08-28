@@ -44,6 +44,7 @@ def main():
         buf = io.BytesIO()
         cropped_img.save(buf, format='JPEG')
         byte_im = buf.getvalue()
+        st.balloons()
 
         if st.button("Make Me Ken"):
             if target_image_option == 'Ken':
