@@ -40,7 +40,7 @@ def main():
         #realtime_update = st.sidebar.checkbox(label="Crop in Real Time", value=True)
         #if realtime_update:
         #    st.sidebar.write("Double click to save crop")
-        realtime_update = true
+        realtime_update = True
         col1, col2 = st.columns(2)
 
         with col1:
