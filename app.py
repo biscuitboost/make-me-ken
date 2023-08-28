@@ -44,7 +44,6 @@ def main():
         buf = io.BytesIO()
         cropped_img.save(buf, format='JPEG')
         byte_im = buf.getvalue()
-        st.balloons()
 
         if st.button("Make Me Ken"):
             if target_image_option == 'Ken':
@@ -56,8 +55,9 @@ def main():
             print("************************")
             print(type(output))
             print(output)
-            #st.image(output["result"], use_column_width=True)
             st.image(output, width = 725)
+            st.balloons()
+
 
 
 if __name__ == '__main__':
