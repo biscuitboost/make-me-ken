@@ -23,27 +23,35 @@ def run_model(target_image_path, swap_image_data):
     return output
 
 def main():
-    st.title(TITLE)
-    st.write(DESC)
+    st.sidebar.title(TITLE)
+    st.sidebar.write(DESC)
 
-    target_image_option = st.radio('Take Your Pick:', ('Ken', 'Barbie'))
-    image_file = st.file_uploader("Upload Clear Photo Of Your Face.", type=['jpg', 'png'])
+    target_image_option = st.sidebar.radio('Take Your Pick:', ('Ken', 'Barbie'))
+    image_file = st.sidebar.file_uploader("Upload Clear Photo Of Your Face.", type=['jpg', 'png'])
 
     if image_file is not None:
         img = Image.open(image_file)
-        realtime_update = st.checkbox(label="Crop in Real Time", value=True)
+        realtime_update = st.sidebar.checkbox(label="Crop in Real Time", value=True)
 
         if realtime_update:
-            st.write("Double click to save crop")
+            st.sidebar.write("Double click to save crop")
+            
+        col1, col2 = st.beta_columns(2)
 
-        # Get a cropped image from the frontend
-        cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#0000FF",
-                                aspect_ratio=(1, 1))
+        with col1:
+            st.header("Original Image")
+            st.image(img, width = 256)
+        
+        with col2:
+            # Get a cropped image from the frontend
+            st.header("Cropped Image (to be replaced with model output)")
+            cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#0000FF",
+                                    aspect_ratio=(1, 1))
+            st.image(cropped_img, width = 256)
 
-        st.image(cropped_img, width = 512)
-        buf = io.BytesIO()
-        cropped_img.save(buf, format='JPEG')
-        byte_im = buf.getvalue()
+            buf = io.BytesIO()
+            cropped_img.save(buf, format='JPEG')
+            byte_im = buf.getvalue()
 
         if st.button("Make Me Ken"):
             if target_image_option == 'Ken':
@@ -52,10 +60,12 @@ def main():
                 target_image_path = 'barbie.jpg'
 
             output = run_model(target_image_path, byte_im)
-            print("************************")
-            print(type(output))
-            print(output)
-            st.image(output, width = 725)
+
+            # Replacing the cropped image with the output image from the model
+            with col2:
+                st.header("Output Image")
+                st.image(output, width = 256)
+
             st.balloons()
 
 
