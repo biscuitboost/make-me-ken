@@ -39,16 +39,12 @@ def main():
         col1, col2 = st.columns(2)
 
         with col1:
-            st.header("Original Image")
-            st.image(img, width = 256)
-        
-        with col2:
             # Get a cropped image from the frontend
-            st.header("Cropped Image (to be replaced with model output)")
             cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#0000FF",
                                     aspect_ratio=(1, 1))
             st.image(cropped_img, width = 256)
-
+        
+        with col2:
             buf = io.BytesIO()
             cropped_img.save(buf, format='JPEG')
             byte_im = buf.getvalue()
