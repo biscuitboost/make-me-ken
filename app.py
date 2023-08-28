@@ -31,11 +31,7 @@ def main():
 
     if image_file is not None:
         img = Image.open(image_file)
-        if st.button("Make Me Ken"):
-            if target_image_option == 'Ken':
-                target_image_path = 'ken.jpg'
-            else:
-                target_image_path = 'barbie.jpg'
+
         
         #realtime_update = st.sidebar.checkbox(label="Crop in Real Time", value=True)
         #if realtime_update:
@@ -60,7 +56,12 @@ def main():
             with col2:
                 st.header("Output Image")
                 st.image(output, width = 256)
-
+            
+            if st.button("Make Me Ken"):
+                if target_image_option == 'Ken':
+                    target_image_path = 'ken.jpg'
+                else:
+                    target_image_path = 'barbie.jpg'
             st.balloons()
 
 
