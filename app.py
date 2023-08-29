@@ -34,7 +34,7 @@ def update_psd(psd_file, input_files, smartobject):
     
     # Save the updated PSD file
     psd.save()
-)
+
         
     
 ################
