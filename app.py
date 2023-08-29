@@ -34,6 +34,7 @@ def update_psd(psd_file, input_files, smartobject):
                         layer.smart_object.file = input_files[embedded_path]
             # save the updated psd file
             psd.save('back-to-future2.psd')
+        
     
 ################
 # Swap Face Model
