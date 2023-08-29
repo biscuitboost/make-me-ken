@@ -22,7 +22,7 @@ DESC = '''Upload or take a picture to become Ken or Barbie'''
 ################
 def update_psd(psd_file, input_files, smartobject):
     st.write("psd_file = ", psd_file)
-    st.write("input_files = ", input_files)
+    #st.write("input_files = ", input_files)
     st.write("smartobject = ", smartobject) 
     psd = PSDImage.open(psd_file)
     psd.composite().save('example.png')
@@ -31,8 +31,8 @@ def update_psd(psd_file, input_files, smartobject):
     for layer in psd:
         layer_name = layer.name
         if layer_name == smartobject:
-            #st.write("Found smart object")
-            layer.replace_contents(input_files)
+            st.write("Found smart object")
+            #layer.replace_contents(input_files)
             #st.write("Replaced smart object")
         #layer_image = layer.composite()
         #layer_image.save('%s.png' % layer.name)
