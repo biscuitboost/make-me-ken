@@ -27,7 +27,7 @@ def update_psd(psd_file, input_files, smartobject):
     print("smartobject = ", smartobject)
     
     with PSDImage.open(psd_file) as psd:
-        print("psd = ", psd
+        print("psd = ", psd)
         if hasattr(psd, 'layers'):
             for layer in psd.layers:
                 print("layer.name = ", layer.name)
