@@ -24,18 +24,19 @@ DESC = '''Upload or take a picture to become Ken or Barbie'''
 def update_psd(psd_file, input_files, smartobject):
     psd = PSDImage.open(psd_file)
     try:
-        for layer in psd.layers:
-            if layer.name == smartobject:
-                # Get the embedded smart object path
-                embedded_path = layer.smart_object.file.reference.filename
-                # Check if the embedded smart object is a psd file
-                if embedded_path in input_files:
-                    # Replace the embedded smart object with the input file
-                    layer.smart_object.file = input_files[embedded_path]
-        # save the updated psd file
-        psd.save('back-to-future2.psd')
+        if hasattr(psd, 'layers'):
+            for layer in psd.layers:
+                if layer.name == smartobject:
+                    # Get the embedded smart object path
+                    embedded_path = layer.smart_object.file.reference.filename
+                    # Check if the embedded smart object is a psd file
+                    if embedded_path in input_files:
+                        # Replace the embedded smart object with the input file
+                        layer.smart_object.file = input_files[embedded_path]
+            # save the updated psd file
+            psd.save('back-to-future2.psd')
     finally:
-        psd.close()
+        psd.__exit__()
     
 ################
 # Swap Face Model
