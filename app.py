@@ -22,6 +22,7 @@ DESC = '''Upload or take a picture to become Ken or Barbie'''
 # Outputs: new updated psd
 ################
 def update_psd(psd_file, input_files, smartobject):
+    # output function inputs as debug info to the console
     st.write("psd_file = ", psd_file)
     st.write("input_files = ", input_files)
     st.write("smartobject = ", smartobject)
@@ -94,7 +95,7 @@ def main():
                 target_image_path = 'barbie.jpg'
             #output = run_model(target_image_path, byte_im)
             output = "ken.jpg"
-            #update_psd('back-to-future.psd', 'blah.jpg', '-e-doc')
+            update_psd('back-to-future.psd', 'blah.jpg', '-e-doc')
             # Replacing the cropped image with the output image from the model
             with col2:
                 st.header("Output Image")
