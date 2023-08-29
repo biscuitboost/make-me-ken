@@ -25,15 +25,17 @@ def update_psd(psd_file, input_files, smartobject):
     with PSDImage.open(psd_file) as psd:
         if hasattr(psd, 'layers'):
             for layer in psd.layers:
+                print("layer.name = ", layer.name")
                 if layer.name == smartobject:
                     # Get the embedded smart object path
                     embedded_path = layer.smart_object.file.reference.filename
+                    print("embedded_path = ", embedded_path)
                     # Check if the embedded smart object is a psd file
                     if embedded_path in input_files:
                         # Replace the embedded smart object with the input file
                         layer.smart_object.file = input_files[embedded_path]
             # save the updated psd file
-            psd.save('back-to-future3.psd')
+            psd.save('back-to-future2.psd')
         
     
 ################
@@ -87,8 +89,7 @@ def main():
                 target_image_path = 'barbie.jpg'
             #output = run_model(target_image_path, byte_im)
             output = "ken.jpg"
-            #update_psd('back-to-future.psd', byte_im, '-e-doc')
-            
+            #update_psd('back-to-future.psd', 'blah.jpg', '-e-doc')
             # Replacing the cropped image with the output image from the model
             with col2:
                 st.header("Output Image")
