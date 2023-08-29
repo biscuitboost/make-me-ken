@@ -22,7 +22,12 @@ DESC = '''Upload or take a picture to become Ken or Barbie'''
 # Outputs: new updated psd
 ################
 def update_psd(psd_file, input_files, smartobject):
+    print("psd_file = ", psd_file)
+    print("input_files = ", input_files)
+    print("smartobject = ", smartobject)
+    
     with PSDImage.open(psd_file) as psd:
+        print("psd = ", psd
         if hasattr(psd, 'layers'):
             for layer in psd.layers:
                 print("layer.name = ", layer.name)
