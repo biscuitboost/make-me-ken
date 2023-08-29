@@ -25,7 +25,7 @@ def update_psd(psd_file, input_files, smartobject):
     with PSDImage.open(psd_file) as psd:
         if hasattr(psd, 'layers'):
             for layer in psd.layers:
-                print("layer.name = ", layer.name")
+                print("layer.name = ", layer.name)
                 if layer.name == smartobject:
                     # Get the embedded smart object path
                     embedded_path = layer.smart_object.file.reference.filename
