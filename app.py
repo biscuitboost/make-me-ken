@@ -87,7 +87,7 @@ def main():
                 target_image_path = 'barbie.jpg'
             #output = run_model(target_image_path, byte_im)
             output = "ken.jpg"
-            update_psd('back-to-future.psd', byte_im, '-e-doc')
+            #update_psd('back-to-future.psd', byte_im, '-e-doc')
             
             # Replacing the cropped image with the output image from the model
             with col2:
