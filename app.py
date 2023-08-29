@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 import io
 from PIL import Image
 from psd_tools import PSDImage
@@ -22,21 +21,20 @@ DESC = '''Upload or take a picture to become Ken or Barbie'''
 # Outputs: new updated psd
 ################
 def update_psd(psd_file, input_files, smartobject):
-    # output function inputs as debug info to the console
     #st.write("psd_file = ", psd_file)
     #st.write("input_files = ", input_files)
     #st.write("smartobject = ", smartobject) 
     psd = PSDImage.open(psd_file)
-    try:
-        # Find the smart object layer
-        layer = psd.smart_object_layers[smartobject]
-        # Replace the contents of the smart object layer with the new image
-        layer.replace_contents(input_files[layer.filepath])
-        # Save the updated PSD file
-        psd.save()
-    finally:
-        # Close the PSD file
-        psd.close()
+    
+    # Find the smart object layer
+    layer = psd.smart_object_layers[smartobject]
+    
+    # Replace the contents of the smart object layer with the new image
+    layer.replace_contents(input_files[layer.filepath])
+    
+    # Save the updated PSD file
+    psd.save()
+)
         
     
 ################
