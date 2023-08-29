@@ -29,10 +29,9 @@ def update_psd(psd_file, input_files, smartobject):
 
     
     for layer in psd:
-        st.write(layer)
         layer_image = layer.composite()
-        layer_image.save('%s.png' % layer.name)
-    
+        #layer_image.save('%s.png' % layer.name)
+        st.write(layer_image)
     
     # Find the smart object layer
     #layer = psd.smart_object_layers[smartobject]
