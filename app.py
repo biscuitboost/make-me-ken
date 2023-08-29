@@ -25,15 +25,23 @@ def update_psd(psd_file, input_files, smartobject):
     #st.write("input_files = ", input_files)
     #st.write("smartobject = ", smartobject) 
     psd = PSDImage.open(psd_file)
+    psd.composite().save('example.png')
+
+    
+    for layer in psd:
+        st.write(layer)
+        layer_image = layer.composite()
+        layer_image.save('%s.png' % layer.name)
+    
     
     # Find the smart object layer
-    layer = psd.smart_object_layers[smartobject]
+    #layer = psd.smart_object_layers[smartobject]
     
     # Replace the contents of the smart object layer with the new image
-    layer.replace_contents(input_files[layer.filepath])
+    #layer.replace_contents(input_files[layer.filepath])
     
     # Save the updated PSD file
-    psd.save()
+    #psd.save()
 
         
     
