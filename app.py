@@ -87,7 +87,7 @@ def main():
                 #update_psd('back-to-future.psd', byte_im, '-e-doc')
                 # Replacing the input image with the output image from the model
                 st.header("Output Image")
-                st.image(output, width=256)
+                st.image(output, use_column_width=True)
                 st.balloons()
 
 if __name__ == '__main__':
