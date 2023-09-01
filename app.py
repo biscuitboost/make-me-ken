@@ -69,22 +69,22 @@ def main():
 
     target_image_option = st.sidebar.radio('Take Your Pick:', ('Ken', 'Barbie'))
     image_file = st.sidebar.file_uploader("Upload Clear Photo Of Your Face.", type=['jpg', 'png'])
-
+    
     if image_file is not None:
-        img = Image.open(image_file)
-        byte_im = img.tobytes()
+        image_data = image_file.read()
+        st.image(image_data, width = 725)
 
         # Check if the image is valid and not empty
-        if len(byte_im) > 0:
+        if len(image_data) > 0:
             make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button')
             if make_ken_button:
                 if target_image_option == 'Ken':
                     target_image_path = 'ken.jpg'
                 else:
                     target_image_path = 'barbie.jpg'
-                #output = run_model(target_image_path, byte_im)
+                output = run_model(target_image_path, image_data)
                 output = "ken.jpg"
-                #update_psd('back-to-future.psd', byte_im, '-e-doc')
+                #update_psd('back-to-future.psd', image_data, '-e-doc')
                 # Replacing the input image with the output image from the model
                 st.header("Output Image")
                 st.image(output, use_column_width=True)
