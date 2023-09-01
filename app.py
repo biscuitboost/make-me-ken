@@ -86,6 +86,7 @@ def main():
                 else:
                     target_image_path = 'images/barbie.jpg'
                 output = run_model(target_image_path, image_data)
+                add_text_to_image(output, "I'm Ken!")
                 #output = "ken.jpg"
                 # Replacing the input image with the output image from the model
                 st.image(output, use_column_width=True)
