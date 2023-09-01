@@ -38,7 +38,7 @@ def run_model(target_image_path, swap_image_data):
 ################
 # add text to image
 ################
-def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, side_margin=10):
+def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, side_margin=50):
     # Download the image from the URL and save it locally
     image_path = 'temp.jpg'
     urllib.request.urlretrieve(image_url, image_path)
