@@ -104,7 +104,7 @@ def main():
             make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button')
             if make_ken_button:
                 target_image_path = 'images/' + target_image_option.lower() + '.jpg'
-                st.write(target_image_option)
+                st.write(target_image_path)
                 replicate_output = run_model(target_image_path, image_data)
                 # save output image url to local
                 output_with_text = add_text_to_image(replicate_output, additional_text, text_color)
