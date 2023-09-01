@@ -73,7 +73,9 @@ def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, sid
         x_pos = (width - w) // 2
         y_pos = (height - text_area_height) + (text_area_height - h) // 2
 
-    # Add text to image
+    # Add text to image with side margins
+    x_pos += side_margin
+
     draw.text((x_pos, y_pos), text, font=font, fill=text_color, align='center')
 
     output_path = 'output.' + image.format
@@ -83,6 +85,7 @@ def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, sid
     os.remove(image_path)
 
     return output_path
+
 
     
 ################
