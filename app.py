@@ -82,8 +82,8 @@ def main():
                     target_image_path = 'ken.jpg'
                 else:
                     target_image_path = 'barbie.jpg'
-                output = run_model(target_image_path, byte_im)
-                #output = "ken.jpg"
+                #output = run_model(target_image_path, byte_im)
+                output = "ken.jpg"
                 #update_psd('back-to-future.psd', byte_im, '-e-doc')
                 # Replacing the input image with the output image from the model
                 st.header("Output Image")
