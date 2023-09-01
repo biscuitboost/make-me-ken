@@ -83,12 +83,16 @@ def main():
                 else:
                     target_image_path = 'barbie.jpg'
                 output = run_model(target_image_path, byte_im)
-                #output = "ken.jpg"
-                #update_psd('back-to-future.psd', byte_im, '-e-doc')
-                # Replacing the input image with the output image from the model
-                st.header("Output Image")
-                st.image(output, width=256)
-                st.balloons()
-
+                if output is not None:
+                    # Output image is not None
+                    st.header("Output Image")
+                    st.image(output, width=256)
+                    st.balloons()
+                else:
+                    # Output image is None
+                    st.error("Error: Failed to generate the output image.")
+                    st.warning("Please try again with a different image.")
+                    st.sidebar.empty()
+    
 if __name__ == '__main__':
     main()
