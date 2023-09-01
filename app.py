@@ -53,7 +53,7 @@ def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, sid
     # Load a font
     # Here we use a default font. Adjust the path and font name according to your requirements.
     font_size = int(text_area_height) - 2 * bottom_margin  # size of font dependent on text area height
-    font = ImageFont.truetype('arial.ttf', font_size)
+    font = ImageFont.truetype('Bartex.ttf', font_size)
 
     # Initiate draw instance
     draw = ImageDraw.Draw(image)
