@@ -58,10 +58,10 @@ def add_text_to_image(image_path, text, bottom_margin=10, side_margin=10):
     # Add text to image
     draw.text((x_pos, y_pos), text, font=font, align='center')
 
-    # Save the image in the same format
-    image.save('output.' + image.format)
+    output_path = 'output.' + image.format
+    image.save(output_path)
 
-    return 'Text added to image successfully!'
+    return output_path
     
 ################
 # Main function
@@ -87,9 +87,7 @@ def main():
                     target_image_path = 'images/barbie.jpg'
                 output = run_model(target_image_path, image_data)
                 # save output image url to local
-                with open("output.jpg", "wb") as f:
-                    f.write(output)
-                add_text_to_image(output, "I'm Ken!")
+                output = add_text_to_image(output, "I'm Ken!")
                 #output = "ken.jpg"
                 # Replacing the input image with the output image from the model
                 st.image(output, use_column_width=True)
