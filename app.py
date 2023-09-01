@@ -76,7 +76,7 @@ def main():
         realtime_update = True
             
         # Move the input image to a separate column
-        col1, col2 = st.beta_columns([2, 1])
+        col1, col2 = st.columns([2, 1])
         with col1:
             cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#e0218a", aspect_ratio=(1, 1))
             st.image(cropped_img, width=256)
