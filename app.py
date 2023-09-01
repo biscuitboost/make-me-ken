@@ -57,7 +57,10 @@ def add_text_to_image(image_url, text, bottom_margin=10, side_margin=10):
 
     # Calculate x position (center text)
     x_pos = (width - w) / 2
-
+    if x_pos < 0:
+        # Adjust x position if the text exceeds the image width
+        x_pos = side_margin
+        
     # Calculate y position (text starts from bottom 25% and includes bottom_margin)
     y_pos = (height - text_area_height) + (text_area_height - h) / 2
 
