@@ -1,7 +1,6 @@
 import streamlit as st
 import io
-from PIL import Image
-from psd_tools import PSDImage
+from PIL import Image, ImageDraw, ImageFont
 import replicate
 
 # Set up configurations
@@ -13,39 +12,7 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 MODEL_ADDRESS = "lucataco/faceswap:9a4298548422074c3f57258c5d544497314ae4112df80d116f0d2109e843d20d"
 TITLE = "I want to be Ken"
 DESC = '''Upload or take a picture to become Ken or Barbie'''
-
-################
-# Update PSD with smart objects
-# Inputs: PSD file, input file, smart object
-# Outputs: new updated psd
-################
-def update_psd(psd_file, input_files, smartobject):
-    st.write("psd_file = ", psd_file)
-    #st.write("input_files = ", input_files)
-    st.write("smartobject = ", smartobject)
-    psd = PSDImage.open(psd_file)
-    psd.composite().save('example.png')
-
     
-    for layer in psd:
-        layer_name = layer.name
-        if layer_name == smartobject:
-            st.write("Found smart object")
-            #layer.replace_contents(input_files)
-            #st.write("Replaced smart object")
-        #layer_image = layer.composite()
-        #layer_image.save('%s.png' % layer.name)
-    
-    # Find the smart object layer
-    #layer = psd.smart_object_layers[smartobject]
-    
-    # Replace the contents of the smart object layer with the new image
-    #layer.replace_contents(input_files[layer.filepath])
-    
-    # Save the updated PSD file
-    #psd.save()
-
-        
     
 ################
 # Swap Face Model
@@ -59,6 +26,42 @@ def run_model(target_image_path, swap_image_data):
         }
     )
     return output
+
+################
+# add text to image
+################
+def add_text_to_image(image_path, text, bottom_margin=10, side_margin=10):
+    # Load image
+    image = Image.open(image_path)
+    width, height = image.size
+
+    # Calculate text area - 25% of image height from the bottom
+    text_area_height = height * 0.25
+
+    # Load a font
+    # Here we use a default font. Adjust the path and font name according to your requirements.
+    font_size = int(text_area_height) - 2 * bottom_margin  # size of font dependent on text area height
+    font = ImageFont.truetype('arial.ttf', font_size)
+
+    # Initiate draw instance
+    draw = ImageDraw.Draw(image)
+
+    # Calculate text width and height
+    w, h = draw.textsize(text, font=font)
+
+    # Calculate x position (center text)
+    x_pos = (width - w) / 2
+
+    # Calculate y position (text starts from bottom 25% and includes bottom_margin)
+    y_pos = (height - text_area_height) + (text_area_height - h) / 2
+
+    # Add text to image
+    draw.text((x_pos, y_pos), text, font=font, align='center')
+
+    # Save the image in the same format
+    image.save('output.' + image.format)
+
+    return 'Text added to image successfully!'
     
 ################
 # Main function
@@ -79,14 +82,12 @@ def main():
             make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button')
             if make_ken_button:
                 if target_image_option == 'Ken':
-                    target_image_path = 'ken.jpg'
+                    target_image_path = 'images/ken.jpg'
                 else:
-                    target_image_path = 'barbie.jpg'
+                    target_image_path = 'images/barbie.jpg'
                 output = run_model(target_image_path, image_data)
                 #output = "ken.jpg"
-                #update_psd('back-to-future.psd', image_data, '-e-doc')
                 # Replacing the input image with the output image from the model
-                st.header("Output Image")
                 st.image(output, use_column_width=True)
                 st.balloons()
 
