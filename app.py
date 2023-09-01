@@ -75,26 +75,28 @@ def main():
         img = Image.open(image_file)
         realtime_update = True
             
-        cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#e0218a",aspect_ratio=(1, 1))
-        st.image(cropped_img, width=256)
-        buf = io.BytesIO()
-        cropped_img.save(buf, format='JPEG')
-        byte_im = buf.getvalue()
+        # Move the input image to a separate column
+        col1, col2 = st.beta_columns([2, 1])
+        with col1:
+            cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#e0218a", aspect_ratio=(1, 1))
+            st.image(cropped_img, width=256)
+            buf = io.BytesIO()
+            cropped_img.save(buf, format='JPEG')
+            byte_im = buf.getvalue()
 
-        # Move "Make me Ken" button to the sidebar and disable it if byte_im is None
-        make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button', disabled=(byte_im is None))
-        if make_ken_button:
-            if target_image_option == 'Ken':
-                target_image_path = 'ken.jpg'
-            else:
-                target_image_path = 'barbie.jpg'
-            output = run_model(target_image_path, byte_im)
-            #output = "ken.jpg"
-            #update_psd('back-to-future.psd', byte_im, '-e-doc')
-            # Replacing the cropped image with the output image from the model
-            st.header("Output Image")
-            st.image(output, width=256)
-            st.balloons()
+        with col2:
+            if byte_im is not None:
+                # Move "Make me Ken" button to the sidebar and disable it if byte_im is None
+                make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button', disabled=(byte_im is None))
+                if make_ken_button:
+                    if target_image_option == 'Ken':
+                        target_image_path = 'ken.jpg'
+                    else:
+                        target_image_path = 'barbie.jpg'
+                    output = run_model(target_image_path, byte_im)
+                    st.header("Output Image")
+                    st.image(output, width=256)
+                    st.balloons()
 
 if __name__ == '__main__':
     main()
