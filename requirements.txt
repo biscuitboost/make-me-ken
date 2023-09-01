@@ -1,5 +1,4 @@
 replicate
 python-dotenv
 streamlit
-streamlit-cropper
-psd_tools
+urllib
