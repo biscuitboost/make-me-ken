@@ -73,13 +73,19 @@ def main():
 
     if image_file is not None:
         img = Image.open(image_file)
+        width, height = img.size
+        aspect_ratio = float(width) / height
         realtime_update = True
+
+        # Adjust the image display size based on aspect ratio
+        img_width = min(640, int(aspect_ratio * 640))
+        img_height = int(img_width / aspect_ratio)
             
         # Move the input image to a separate column
         col1, col2 = st.columns([2, 1])
         with col1:
-            cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#e0218a", aspect_ratio=(1, 1))
-            st.image(cropped_img, width=256)
+            cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#e0218a", aspect_ratio=aspect_ratio)
+            st.image(cropped_img, width=img_width, height=img_height)
             buf = io.BytesIO()
             cropped_img.save(buf, format='JPEG')
             byte_im = buf.getvalue()
