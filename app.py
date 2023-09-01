@@ -23,7 +23,7 @@ DESC = '''Upload or take a picture to become Ken or Barbie'''
 def update_psd(psd_file, input_files, smartobject):
     st.write("psd_file = ", psd_file)
     #st.write("input_files = ", input_files)
-    st.write("smartobject = ", smartobject) 
+    st.write("smartobject = ", smartobject)
     psd = PSDImage.open(psd_file)
     psd.composite().save('example.png')
 
@@ -73,16 +73,17 @@ def main():
 
     if image_file is not None:
         img = Image.open(image_file)
-        #    st.sidebar.write("Double click to save crop")
         realtime_update = True
-            # Get a cropped image from the frontend
             
-        cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#0000FF",aspect_ratio=(1, 1))
-        st.image(cropped_img, width = 256)
+        cropped_img = st_cropper(img, realtime_update=realtime_update, box_color="#e0218a",aspect_ratio=(1, 1))
+        st.image(cropped_img, width=256)
         buf = io.BytesIO()
         cropped_img.save(buf, format='JPEG')
         byte_im = buf.getvalue()
-        if st.button("Make Me Ken"):
+
+        # Move "Make me Ken" button to the sidebar and disable it if byte_im is None
+        make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button', disabled=(byte_im is None))
+        if make_ken_button:
             if target_image_option == 'Ken':
                 target_image_path = 'ken.jpg'
             else:
@@ -92,8 +93,8 @@ def main():
             #update_psd('back-to-future.psd', byte_im, '-e-doc')
             # Replacing the cropped image with the output image from the model
             st.header("Output Image")
-            st.image(output, width = 256)
+            st.image(output, width=256)
             st.balloons()
 
 if __name__ == '__main__':
-  main()
+    main()
