@@ -38,7 +38,7 @@ def run_model(target_image_path, swap_image_data):
 ################
 # add text to image
 ################
-def add_text_to_image(image_url, text, bottom_margin=10, side_margin=10):
+def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, side_margin=10):
     # Download the image from the URL and save it locally
     image_path = 'temp.jpg'
     urllib.request.urlretrieve(image_url, image_path)
@@ -71,7 +71,7 @@ def add_text_to_image(image_url, text, bottom_margin=10, side_margin=10):
     y_pos = (height - text_area_height) + (text_area_height - h) / 2
 
     # Add text to image
-    draw.text((x_pos, y_pos), text, font=font, align='center')
+    draw.text((x_pos, y_pos), text, font=font, fill=text_color, align='center')
 
     output_path = 'output.' + image.format
     image.save(output_path)
@@ -93,6 +93,7 @@ def main():
     image_file = st.sidebar.file_uploader("Upload Clear Photo Of Your Face.", type=['jpg', 'png'])
     default_text = dropdown_options[target_image_option]
     additional_text = st.sidebar.text_input('Additional Text', default_text)
+    text_color = st.sidebar.color_picker("Text Color", "#ffffff")
     
     if image_file is not None:
         image_data = image_file.read()
@@ -105,7 +106,7 @@ def main():
                 target_image_path = 'images/' + target_image_option.lower() + '.jpg'
                 replicate_output = run_model(target_image_path, image_data)
                 # save output image url to local
-                output_with_text = add_text_to_image(replicate_output, additional_text)
+                output_with_text = add_text_to_image(replicate_output, additional_text, text_color)
                 st.image(output_with_text, use_column_width=True)
                 st.balloons()
 
