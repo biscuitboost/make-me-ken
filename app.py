@@ -75,11 +75,12 @@ def main():
         img = Image.open(image_file)
         width, height = img.size
         aspect_ratio = float(width) / height
+        aspect_ratio = (aspect_ratio, 1)  # Convert to tuple
         realtime_update = True
 
         # Adjust the image display size based on aspect ratio
-        img_width = min(640, int(aspect_ratio * 640))
-        img_height = int(img_width / aspect_ratio)
+        img_width = min(640, int(aspect_ratio[0] * 640))
+        img_height = int(img_width / aspect_ratio[0])
             
         # Move the input image to a separate column
         col1, col2 = st.columns([2, 1])
