@@ -61,14 +61,17 @@ def add_text_to_image(image_url, text, text_color='white', bottom_margin=10, sid
     # Calculate text width and height
     w, h = draw.textsize(text, font=font)
 
-    # Calculate x position (center text)
-    x_pos = (width - w) / 2
-    if x_pos < 0:
-        # Adjust x position if the text exceeds the image width
-        x_pos = side_margin
-        
-    # Calculate y position (text starts from bottom 25% and includes bottom_margin)
-    y_pos = (height - text_area_height) + (text_area_height - h) / 2
+    if w < width - 2 * side_margin and h < text_area_height:
+        # Text fits within the available space, no need to resize
+        x_pos = (width - w) // 2
+        y_pos = (height - text_area_height) + (text_area_height - h) // 2
+    else:
+        # Text doesn't fit, resize the font to fit the available space
+        font_size = min(font_size, int(text_area_height * (width - 2 * side_margin) / w))
+        font = ImageFont.truetype('Bartex.ttf', font_size)
+        w, h = draw.textsize(text, font=font)
+        x_pos = (width - w) // 2
+        y_pos = (height - text_area_height) + (text_area_height - h) // 2
 
     # Add text to image
     draw.text((x_pos, y_pos), text, font=font, fill=text_color, align='center')
