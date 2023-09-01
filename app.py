@@ -1,5 +1,6 @@
 import streamlit as st
 import io
+import urllib
 from PIL import Image, ImageDraw, ImageFont
 import replicate
 
@@ -30,7 +31,11 @@ def run_model(target_image_path, swap_image_data):
 ################
 # add text to image
 ################
-def add_text_to_image(image_path, text, bottom_margin=10, side_margin=10):
+def add_text_to_image(image_url, text, bottom_margin=10, side_margin=10):
+    # Download the image from the URL and save it locally
+    image_path = 'temp.jpg'
+    urllib.request.urlretrieve(image_url, image_path)
+
     # Load image
     image = Image.open(image_path)
     width, height = image.size
@@ -61,7 +66,11 @@ def add_text_to_image(image_path, text, bottom_margin=10, side_margin=10):
     output_path = 'output.' + image.format
     image.save(output_path)
 
+    # Cleanup: Delete the temporary image file
+    os.remove(image_path)
+
     return output_path
+
     
 ################
 # Main function
