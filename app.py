@@ -72,7 +72,7 @@ def main():
     
     if image_file is not None:
         image_data = image_file.read()
-        st.image(image_data, width = 725)
+        st.image(image_data, width = 100)
 
         # Check if the image is valid and not empty
         if len(image_data) > 0:
@@ -83,7 +83,7 @@ def main():
                 else:
                     target_image_path = 'barbie.jpg'
                 output = run_model(target_image_path, image_data)
-                output = "ken.jpg"
+                #output = "ken.jpg"
                 #update_psd('back-to-future.psd', image_data, '-e-doc')
                 # Replacing the input image with the output image from the model
                 st.header("Output Image")
