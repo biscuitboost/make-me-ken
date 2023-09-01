@@ -15,7 +15,13 @@ MODEL_ADDRESS = "lucataco/faceswap:9a4298548422074c3f57258c5d544497314ae4112df80
 TITLE = "I want to be Ken"
 DESC = '''Upload or take a picture to become Ken or Barbie'''
     
-    
+dropdown_options = {
+    'Ken': 'I\'m Ken!',
+    'Barbie': 'I\'m Barbie!',
+    'Superman': 'I\'m Superman!',
+    'Wonder Woman': 'I\'m Wonder Woman!'
+}
+
 ################
 # Swap Face Model
 ################
@@ -83,26 +89,23 @@ def main():
     st.sidebar.title(TITLE)
     st.sidebar.write(DESC)
 
-    target_image_option = st.sidebar.radio('Take Your Pick:', ('Ken', 'Barbie'))
+    target_image_option = st.sidebar.selectbox('Take Your Pick:', list(dropdown_options.keys()))
     image_file = st.sidebar.file_uploader("Upload Clear Photo Of Your Face.", type=['jpg', 'png'])
+    default_text = dropdown_options[target_image_option]
+    additional_text = st.sidebar.text_input('Additional Text', default_text)
     
     if image_file is not None:
         image_data = image_file.read()
-        st.image(image_data, width = 100)
+        st.image(image_data, width=100)
 
         # Check if the image is valid and not empty
         if len(image_data) > 0:
             make_ken_button = st.sidebar.button("Make Me Ken", key='make_ken_button')
             if make_ken_button:
-                if target_image_option == 'Ken':
-                    target_image_path = 'images/ken.jpg'
-                else:
-                    target_image_path = 'images/barbie.jpg'
+                target_image_path = 'images/' + target_image_option.lower() + '.jpg'
                 replicate_output = run_model(target_image_path, image_data)
                 # save output image url to local
-                output_with_text = add_text_to_image(replicate_output, "I'm Ken!")
-                #output = "ken.jpg"
-                # Replacing the input image with the output image from the model
+                output_with_text = add_text_to_image(replicate_output, additional_text)
                 st.image(output_with_text, use_column_width=True)
                 st.balloons()
 
