@@ -107,7 +107,8 @@ def main():
                 replicate_output = run_model(target_image_path, image_data)
                 # save output image url to local
                 output_with_text = add_text_to_image(replicate_output, additional_text, text_color)
-                st.image(output_with_text, use_column_width=True)
+                #st.image(output_with_text, use_column_width=True)
+                st.image(output_with_text, width=480)
                 st.balloons()
 
 if __name__ == '__main__':
