@@ -1,5 +1,6 @@
 import streamlit as st
 import io
+import os
 import urllib
 from PIL import Image, ImageDraw, ImageFont
 import replicate
