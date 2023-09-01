@@ -106,6 +106,7 @@ def main():
                 target_image_path = 'images/' + target_image_option.lower() + '.jpg'
                 replicate_output = run_model(target_image_path, image_data)
                 # save output image url to local
+                st.write(replicate_output)
                 output_with_text = add_text_to_image(replicate_output, additional_text, text_color)
                 #st.image(output_with_text, use_column_width=True)
                 st.image(output_with_text, width=480)
