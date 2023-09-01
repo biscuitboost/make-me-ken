@@ -85,12 +85,12 @@ def main():
                     target_image_path = 'images/ken.jpg'
                 else:
                     target_image_path = 'images/barbie.jpg'
-                output = run_model(target_image_path, image_data)
+                replicate_output = run_model(target_image_path, image_data)
                 # save output image url to local
-                output = add_text_to_image(output, "I'm Ken!")
+                output_with_text = add_text_to_image(replicate_output, "I'm Ken!")
                 #output = "ken.jpg"
                 # Replacing the input image with the output image from the model
-                st.image(output, use_column_width=True)
+                st.image(output_with_text, use_column_width=True)
                 st.balloons()
 
 if __name__ == '__main__':
